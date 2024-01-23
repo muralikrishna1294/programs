@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+    
+    int data;
+    struct node *link;
+};
+struct node* head=NULL;
+struct node* create_node(int data){
+    
+        struct node* new_node =(struct node*)malloc(sizeof(struct node));
+        new_node->data= data;
+        new_node->link =NULL;
+        return new_node;
+}
+//insert before the head
+void insert_data(int data){    
+    struct node *new_head=create_node(data);
+    if(head==NULL){      
+         head=new_head;
+    }else{      
+        new_head->link =head;
+                 head= new_head;
+    }
+}
+void display(){
+    struct node*temp=head;
+    while(temp!=NULL){
+        printf("%d",temp->data);
+        temp=temp->link;
+        
+    }
+}
+int main(){
+    
+    insert_data(5);
+    insert_data(11);
+    insert_data(20);
+    display();
+    return 0;
+}
+
