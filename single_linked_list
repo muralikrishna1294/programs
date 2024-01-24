@@ -31,12 +31,26 @@ void display(){
         
     }
 }
+void insert_end(int data){
+    
+     struct node *tail=create(data);
+     struct node *temp =head;
+     while(temp->link!=NULL){
+         
+         temp=temp->link;
+     }
+     temp->link=tail;
+     
+}
 int main(){
     
     insert_data(5);
     insert_data(11);
     insert_data(20);
     display();
+     insert_end(10);
+     insert_end(90);
+     insert_end(100);
     return 0;
 }
 
