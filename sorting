@@ -1,0 +1,82 @@
+include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    
+    
+    int data;
+    struct node *link;
+};
+struct node *head =NULL;
+
+
+struct node* new_node(int data){
+      
+      struct node* new =  (struct node *)malloc(sizeof(struct node));
+
+            new->data= data;
+            new->link =NULL;
+            return new;
+}
+void create(int data){
+            struct node* s  = new_node(data);
+            if(head ==NULL){
+                
+                 head =s;
+            }else{
+                
+                s->link =head;
+                head =s;
+                
+            }            
+    
+}
+void display(){
+    
+    struct node *temp =head;
+    
+    while(temp!=NULL){
+        printf(" %d",temp->data);
+        temp =temp->link;
+    }
+    printf("\n");
+    
+}
+
+void sorting(int num){
+    
+    struct node* temp=head;
+     struct node* new  = new_node(num);
+     if(temp ==NULL){
+         new->link=temp;
+         temp=new;
+         return;
+         
+     }
+     while(temp->link!=NULL && temp->link->data > new->data){
+         temp =temp->link;
+        
+     }
+     
+     new->link =temp->link;
+     temp->link =new;
+}
+int main()
+{
+
+
+            create(5);
+            create(10);
+            create(20);
+            create(30);
+            create(40);
+             create(50);
+            display();
+            sorting(25);
+             sorting(35);
+              sorting(45);
+            display();
+            
+
+    return 0;
+}
