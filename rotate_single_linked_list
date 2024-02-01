@@ -1,0 +1,90 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    
+    
+    int data;
+    struct node *link;
+};
+struct node *head =NULL;
+
+
+struct node* new_node(int data){
+      
+      struct node* new =  (struct node *)malloc(sizeof(struct node));
+
+            new->data= data;
+            new->link =NULL;
+            return new;
+}
+void create(int data){
+            struct node* s  = new_node(data);
+            if(head ==NULL){
+                
+                 head =s;
+            }else{
+                
+                s->link =head;
+                head =s;
+                
+            }            
+    
+}
+void display(){
+    
+    struct node *temp =head;
+    
+    while(temp!=NULL){
+        printf(" %d",temp->data);
+        temp =temp->link;
+    }
+    printf("\n");
+    
+}
+
+void rotate(int pos){
+    int count =1;
+    
+    struct node*cur =head;
+    
+    while(count <pos  && cur!=NULL){
+        
+        cur= cur->link;
+        count++;
+    }
+    struct node* kth_node =cur;
+    
+    while(cur->link!=NULL){
+        cur =cur->link;
+    }
+    cur->link =head;
+    head =kth_node->link;
+    kth_node->link =NULL;
+    
+}
+int main()
+{
+
+
+            create(5);
+            create(10);
+            create(20);
+            create(19);
+            create(39);
+             create(49);
+            display();
+            rotate(2);
+            display();
+            
+
+    return 0;
+}
