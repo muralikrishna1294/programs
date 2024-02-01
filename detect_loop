@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    
+    int data;
+    struct node* link;
+};
+struct node* head =NULL;
+
+struct node* new_node(int data){
+    
+                    struct node* new =(struct node *)malloc(sizeof(struct node));
+                    new->data =data;
+                    new->link =NULL;
+                    return new;
+}
+void create(int data){
+    
+        struct node* new =  new_node(data);
+        if(head ==NULL){
+            
+                  head =new;
+        }else{
+            
+            new->link =head;
+            head =new;
+        }
+}
+void display(){
+    
+    struct node* temp =head;
+    while(temp!=NULL){
+        
+        printf(" %d",temp->data);
+        temp =temp->link;
+    }
+    printf("\n");
+}
+void move_to_last(){
+ 
+ struct node* temp= head;
+ struct node* cur =NULL;
+ while(temp->link!=NULL){
+              cur=temp;
+              temp =temp->link;
+     
+ }
+ cur->link =NULL;
+ temp->link =head;
+         head=temp;
+    
+}
+
+int detect_loop(){
+    
+    
+    struct node* slow =head;
+    struct node* fast =head;
+    while(slow!=NULL && fast!=NULL &&fast->link!=NULL){
+        
+         slow= slow->link;
+         fast= fast->link->link;
+         if(slow ==fast){
+            return 1;
+             
+         }
+    }
+    return 0;
+}
+int main()
+{
+    create(10);
+    create(15);
+    create(4);
+    create(20);
+   
+display();
+  head->link->link->link->link=head; 
+  
+if(detect_loop())
+ printf("loop found");
+ else
+ printf("loop not found");
+    return 0;
+}
