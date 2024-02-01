@@ -1,0 +1,105 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    
+    int data;
+    struct node* link;
+};
+struct node* head =NULL;
+
+struct node* new_node(int data){
+    
+                    struct node* new =(struct node *)malloc(sizeof(struct node));
+                    new->data =data;
+                    new->link =NULL;
+                    return new;
+}
+void create(int data){
+    
+        struct node* new =  new_node(data);
+        if(head ==NULL){
+            
+                  head =new;
+        }else{
+            
+            new->link =head;
+            head =new;
+        }
+}
+void display(){
+    
+    struct node* temp =head;
+    while(temp!=NULL){
+        
+        printf(" %d",temp->data);
+        temp =temp->link;
+    }
+    printf("\n");
+}
+void move_to_last(){
+ 
+ struct node* temp= head;
+ struct node* cur =NULL;
+ while(temp->link!=NULL){
+              cur=temp;
+              temp =temp->link;
+     
+ }
+ cur->link =NULL;
+ temp->link =head;
+         head=temp;
+    
+}
+void rm_duplicated_un_sorted_linked_list(){
+    
+    struct node* ptr1 =head;
+    struct node* dup,*ptr2;
+    while(ptr1!=NULL &&ptr1->link!=NULL){
+                  
+            ptr2 =ptr1;
+            
+            while(ptr2->link!=NULL){
+                
+                if(ptr1->data==ptr2->link->data){
+                         dup=ptr2->link;
+                           ptr2->link     =    ptr2->link->link;
+                              free(dup);
+                    
+                                    }else{
+                    
+                    ptr2 =ptr2->link;
+                }
+                
+              
+                
+            }
+        
+         ptr1 =ptr1->link;
+    }
+   
+        
+   
+}
+int main()
+{
+    create(51);
+    create(11);
+    create(23);
+    create(23);
+    create(23);
+    create(51);
+display();
+  rm_duplicated_un_sorted_linked_list();
+  display();
+
+    return 0;
+}
