@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+struct node{
+    
+    
+    int data;
+    struct node* link;
+};
+struct node* head =NULL;
+
+struct node* new_node(int data){
+    
+                struct node* new    =    (struct node *)malloc(sizeof(struct node));
+                new->link =NULL;
+                new->data =data;
+              return new;
+}
+void create(int data){
+    
+    
+    struct node* new =new_node(data);
+    if(head ==NULL){
+        head =new;
+                 
+    }else{
+        new->link =head;
+        head =new;
+        
+        
+    }
+    
+}
+void display(){
+    
+    
+    struct node* temp =head;
+    while(temp!=NULL){
+        
+        
+        printf(" %d",temp->data);
+        temp=temp->link;
+    }
+    printf("\n");
+}
+
+void second_smallest_element(){
+    
+    
+    struct node* temp =head;
+    int first =INT_MAX,second=INT_MAX;
+    
+    while(temp!=NULL){
+    if(temp->data <first){
+                 second=  first;
+                 first =temp->data;
+                
+}else if(temp->data>second){
+    
+           second =temp->data;
+}
+
+temp=temp->link;
+}
+
+printf("\n second smallest element =%d\n",second);
+}
+void main(){
+    
+    
+     create(3);
+     create(30);
+     create(40);
+     create(54);
+      create(154);
+       create(120);
+        create(10);
+     display();
+     second_smallest_element();
+    
+}
