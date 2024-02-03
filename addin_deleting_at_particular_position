@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+struct node{
+    
+    
+    int data;
+    struct node* link;
+};
+struct node* head =NULL;
+
+struct node* new_node(int data){
+                    struct node* new    =    (struct node *)malloc(sizeof(struct node));
+                new->link =NULL;
+                new->data =data;
+              return new;
+}
+void create(int data){
+            struct node* new =new_node(data);
+    if(head ==NULL){
+        head =new;
+                 
+    }else{
+        new->link =head;
+        head =new;
+        
+        
+    }
+    
+}
+
+void display(){
+        struct node* temp =head;
+    while(temp!=NULL){
+            printf(" %d",temp->data);
+        temp=temp->link;
+    }
+    printf("\n");
+   
+}
+void delete_particular_positon(int data){
+    int count =1;
+    struct node* temp =head;
+    struct node* prev;
+    while(temp!=NULL & count <data){
+        prev=temp;
+        temp=temp->link;
+        count++;
+    }
+    prev->link=temp->link;
+    free(temp);
+   
+    
+}
+
+void adding_particular_postion(int data){
+    int count =1;
+    struct node* temp =head;
+    while(temp!=NULL & count <data){
+        temp=temp->link;
+        count++;
+    }
+    struct node* new =new_node(data);
+   new->link=temp->link;
+    temp->link=new;
+   
+   
+    
+}
+
+void main(){
+    
+    
+     create(3);
+     create(6);
+     create(9);
+     create(15);
+      create(30);
+     display();
+     delete_particular_positon(4);
+      display();
+      delete_particular_positon(2);
+        display();
+     delete_particular_positon(3);
+      display();
+    adding_particular_postion(2);
+          display();
+          adding_particular_postion(2);
+          display();
+           adding_particular_postion(3);
+           display();
+    
+  
+    
+}
