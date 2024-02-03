@@ -1,0 +1,109 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <stdbool.h>
+
+struct node{
+    
+    
+    int data;
+    struct node* link;
+};
+struct node* head =NULL;
+
+struct node* new_node(int data){
+    
+                struct node* new    =    (struct node *)malloc(sizeof(struct node));
+                new->link =NULL;
+                new->data =data;
+              return new;
+}
+void create(int data){
+    
+    
+    struct node* new =new_node(data);
+    if(head ==NULL){
+        head =new;
+                 
+    }else{
+        new->link =head;
+        head =new;
+        
+        
+    }
+    
+}
+
+void display(){
+        struct node* temp =head;
+        if(temp==NULL){
+            
+            printf("\n no node is available\n");
+        }
+    while(temp!=NULL){
+            printf(" %d",temp->data);
+        temp=temp->link;
+    }
+    printf("\n");
+   
+}
+int prime(int n){
+   
+// Corner cases
+    if (n <= 1)
+        return false;
+    if (n <= 3)
+        return true;
+ 
+    // This is checked so that we can skip
+    // middle five numbers in below loop
+    if (n % 2 == 0 || n % 3 == 0)
+        return false;
+ 
+    for (int i = 5; i * i <= n; i = i + 6)
+        if (n % i == 0 || n % (i + 2) == 0)
+            return false;
+ 
+    return true;
+}
+void delete_node(struct node *temp){
+    struct node* cur =head;
+    
+    while(cur->link!=temp){
+        
+        cur =cur->link;
+    }
+    cur->link= temp->link;
+    free(temp);
+}
+void delete_all_prime_nodes(){
+    struct node* temp =head;
+    struct node* next=NULL;
+    
+    while(temp!=NULL){
+       
+        next =temp->link;
+       if(prime(temp->data)){
+        delete_node(temp);     
+        }
+             temp =next;
+        
+    }
+    
+}
+
+void main(){
+    
+    
+     create(3);
+     create(6);
+     create(9);
+     create(29);
+      create(9);
+      create(30);
+     display();
+     delete_all_prime_nodes();
+      display();
+    
+  
+}
