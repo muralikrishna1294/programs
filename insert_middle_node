@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+struct node{
+    
+    
+    int data;
+    struct node* link;
+};
+struct node* head =NULL;
+
+struct node* new_node(int data){
+    
+                struct node* new    =    (struct node *)malloc(sizeof(struct node));
+                new->link =NULL;
+                new->data =data;
+              return new;
+}
+void create(int data){
+    
+    
+    struct node* new =new_node(data);
+    if(head ==NULL){
+        head =new;
+                 
+    }else{
+        new->link =head;
+        head =new;
+        
+        
+    }
+    
+}
+
+void display(){
+        struct node* temp =head;
+    while(temp!=NULL){
+            printf(" %d",temp->data);
+        temp=temp->link;
+    }
+    printf("\n");
+   
+}
+void mid_node(int data){
+    
+    struct node* mid =new_node(data);
+    struct node* slow =head;
+    struct node* fast =head->link;
+    while(fast!=NULL && fast->link!=NULL){
+        
+        slow= slow->link;
+        fast=fast->link->link;
+    }
+    
+    mid->link =slow->link;
+    slow->link =mid;
+    
+}
+void mid_node_method_2(int data){
+    
+    struct node* temp =head;
+     struct node* ptr =head;
+    int length=0;
+     struct node* mid =new_node(data);
+    while(temp!=NULL){
+        
+        temp=temp->link;
+        length++;
+    }
+    
+    int count =((length%2==0)?(length/2):((length+1)/2));
+    
+    while(count-->1){
+        
+        ptr =ptr->link;
+     
+    }
+    
+    mid->link =ptr->link;
+    ptr->link =mid;
+    
+    
+}
+void main(){
+    
+    
+     create(3);
+     create(6);
+     create(9);
+     create(15);
+      create(30);
+     display();
+     mid_node(50);
+      display();
+      mid_node(20);
+      display();
+      mid_node_method_2(100);
+      display();
+       mid_node_method_2(120);
+       display();
+  
+    
+}
