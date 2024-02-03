@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+struct node{
+    
+    
+    int data;
+    struct node* link;
+};
+struct node* head =NULL;
+
+struct node* new_node(int data){
+    
+                struct node* new    =    (struct node *)malloc(sizeof(struct node));
+                new->link =NULL;
+                new->data =data;
+              return new;
+}
+void create(int data){
+    
+    
+    struct node* new =new_node(data);
+    if(head ==NULL){
+        head =new;
+                 
+    }else{
+        new->link =head;
+        head =new;
+        
+        
+    }
+    
+}
+
+void display(){
+    
+    
+    struct node* temp =head;
+    while(temp!=NULL){
+        
+        
+        printf(" %d",temp->data);
+        temp=temp->link;
+    }
+    printf("\n");
+   
+}
+void index_node(int data){
+    
+    struct node* temp =head;
+    int index=1;
+    
+    while(temp!=NULL && temp->data!=data){
+        temp= temp->link;
+        index++;
+    }
+    
+    printf("\n index position=%d\n",index);
+}
+
+void main(){
+    
+    
+     create(3);
+     create(6);
+     create(9);
+     create(15);
+      create(30);
+     display();
+     index_node(3);
+     index_node(15);
+ 
+    
+}
