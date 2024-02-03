@@ -82,6 +82,27 @@ void mid_node_method_2(int data){
     
     
 }
+void  delete_mid_node(){
+    
+    int count=0;
+    int length=1;
+    struct node* temp =head;
+    struct node* ptr =head;
+    struct node* prev =NULL;
+    while(temp!=NULL){
+        temp =temp->link;
+        
+        length++;
+    }
+    count =((length%2==0)?(length/2):((length+1)/2));
+    
+       while(count-->1){
+           prev=ptr;
+           ptr=ptr->link;
+       }
+       prev->link=ptr->link;
+       free(temp);
+}
 void main(){
     
     
@@ -99,6 +120,11 @@ void main(){
       display();
        mid_node_method_2(120);
        display();
+       delete_mid_node();
+       display();
+        delete_mid_node();
+         display();
+          delete_mid_node();
+          display();
   
-    
 }
